@@ -1,0 +1,73 @@
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+{"message":"Errors should log","level":"error"}
+2018-11-09T05:17:22.707Z [right meow!] error: Errors should log
+2018-11-09T05:17:49.087Z [right meow!] error: Errors should log
+2018-11-09T05:18:36.092Z [right meow!] error: Errors should log
+2018-11-09T05:19:49.590Z [right meow!] error: Errors should log
+2018-11-09T05:20:37.173Z [right meow!] [31merror[39m: Errors should log
+[31merror[39m: Errors should log  [right meow!]  2018-11-09T05:21:12.542Z
+[31merror[39m: Errors should log   2018-11-09T05:22:30.285Z
+[31merror[39m: Errors should log   2018-11-09T05:24:06.762Z
+[31merror[39m: Errors should log   2018-11-09T05:26:53.478Z
+[31merror[39m: Errors should log   2018-11-09T05:26:59.286Z
+[31merror[39m: Errors should log   2018-11-09T05:28:16.619Z
+[31merror[39m: Errors should log   2018-11-09T05:28:51.543Z
+[31merror[39m: Errors should log   2018-11-09T05:29:32.096Z
+[31merror[39m: Errors should log   2018-11-09T05:29:41.346Z
+[31merror[39m: Errors should log   2018-11-09T05:30:05.152Z
+[31merror[39m: Errors should log   2018-11-09T05:30:16.350Z
+[31merror[39m: Errors should log   2018-11-09T05:31:00.174Z
+[31merror[39m: Errors should log   2018-11-09T05:31:36.613Z
+[31merror[39m: Errors should log   5:32:am,  9th November  2018,
+[31merror[39m: Errors should log   5:33:am,  9th November  2018,
+[31merror[39m: Errors should log   5:33:am,  9th November  2018,
+[31merror[39m: Errors should log   5:34:am,  9th November  2018,
+[31merror[39m: Errors should log   5:39:am,  9th November  2018,
+[31merror[39m: Errors should log   5:39:am,  9th November  2018,
+[31merror[39m: Errors should log   5:41:am,  9th November  2018,
+[31merror[39m: Errors should log   5:42:am,  9th November  2018,
+[31merror[39m: Errors should log   5:42:am,  9th November  2018,
+[31merror[39m: Errors should log   5:52:am,  9th November  2018,
+[31merror[39m: Errors should log   5:59:am,  9th November  2018,
+[31merror[39m: Errors should log   5:59:am,  9th November  2018,
+[31merror[39m: Errors should log   6:00:am,  9th November  2018,
+[31merror[39m: Errors should log   6:01:am,  9th November  2018,
+[31merror[39m: Errors should log   6:03:am,  9th November  2018,
+[31merror[39m: Errors should log   6:04:am,  9th November  2018,
+[31merror[39m: Errors should log   6:14:am,  9th November  2018,
+[31merror[39m: Errors should log   6:20:am,  9th November  2018,
+[31merror[39m: Errors should log   6:27:am,  9th November  2018,
+[31merror[39m: Errors should log   6:33:am,  9th November  2018,
+[31merror[39m: Errors should log   6:48:am,  9th November  2018,
+[31merror[39m: Errors should log   6:59:am,  9th November  2018,
+[31merror[39m: Errors should log   6:59:am,  9th November  2018,
+[31merror[39m: Errors should log   7:07:am,  9th November  2018,
+[31merror[39m: Errors should log   7:08:am,  9th November  2018,
+[31merror[39m: Errors should log   7:31:am,  9th November  2018,
+[31merror[39m: Errors should log   7:33:am,  9th November  2018,
+[31merror[39m: Errors should log   7:35:am,  9th November  2018,
+[31merror[39m: Errors should log   7:39:am,  9th November  2018,
+[31merror[39m: Errors should log   7:48:am,  9th November  2018,
+[31merror[39m: Errors should log   7:48:am,  9th November  2018,
+[31merror[39m: req.flash() requires sessions   11:40:am,  9th November  2018,
+[31merror[39m: req.flash() requires sessions   11:53:am,  9th November  2018,
+[31merror[39m: req.flash() requires sessions   11:59:am,  9th November  2018,
+[31merror[39m: [object Object]   11:51:pm,  10th November  2018,
+[31merror[39m: [object Object]   11:53:pm,  10th November  2018,
+[31merror[39m: Cast to ObjectId failed for value "{ user: '5bed767789b0cd3b8b126a6a' }" at path "_id" for model "AndroidUser"   9:57:pm,  17th November  2018,

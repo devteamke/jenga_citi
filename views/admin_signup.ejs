@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Jenga | Registration Page</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="register-logo">
+    <a href="#"><b>Jenga</b> Citi</a>
+  </div>
+
+  <div class="register-box-body">
+    <p class="login-box-msg"><b>Join us in transforming our Citi</b></p>
+  <% if(error && error.length>0){ %>
+              <div class="alert alert-danger">
+                <%= error %>
+              </div>
+            <% } %>
+            <%if (success && success.length>0){ %>
+            <div class="alert alert-success">
+              <%= success %>
+            </div>
+            <% }%>
+    <form action="/register" method="post">
+      <div class="form-group has-feedback">
+        <input type="text"  name="fname" class="form-control" placeholder="First name">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="text"  name="lname" class="form-control" placeholder="Second name">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="email" name="email" class="form-control" placeholder="Email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+       <div class="form-group has-feedback">
+            <input name="password"  type="password" class="form-control" placeholder="Password" required>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+            <input name="confirmPassword"   type="password" class="form-control" placeholder="Confirm password" required>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+       <div class="form-group">
+                  
+                  <label for="exampleInputPassword1">Role:</label>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="role"  id="adminrole" value="admin">
+                          Admin
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                    <input type="radio" name="role" id="govt" value="govt-official">  
+                        Govt Official
+                    </label>
+                  </div>
+                  
+                  <div class="radio">
+                    <label>
+                     <input type="radio" name="role" id="supervisorrole" value="Supervisor"> 
+                     Supervisor
+                    </label>
+                  </div>
+                  
+                  
+                 
+                
+                </div>
+                  <div class="form-group" id="govtauthority">
+                 <label for="exampleInputPassword1">Authority:</label>
+                <select id="selectedauthority" name="authority" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                
+                  <option value="land_commission">National Land Commission</option>
+                  <option value="nema">NEMA</option>
+                  <option value="police">Kenya Police Authority</option>
+                  <option value="ntsa">NTSA</option>
+                  <option value="pipeline">Kenya Pipeline</option>
+                   <option value="nairobi_water">Nairobi Water</option>
+               
+                </select>
+                </div>
+               <div class="form-group" id="county">
+                 <label for="exampleInputPassword1">County:</label>
+                <select id='selectedcounty' name="county" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                
+                  <option value="Mombasa">Mombasa</option>
+                  <option value="Kwale">Kwale</option>
+                  <option value="Kilifi">Kilifi</option>
+                  <option value="Tana River">Tana River</option>
+                  <option value="Lamu">Lamu</option>
+                  <option value="Taita-Taveta">Taita-Taveta</option>
+                  <option value="Garissa">Garissa</option>
+                  <option value="Wajir">Wajir</option>
+                  <option value="Mandera">Mandera</option>
+                  <option value="Marsabi">Marsabit</option>
+                  <option value="Isiolo">Isiolo</option>
+                  <option value="Meru">Meru</option>
+                  <option value="Tharaka-Nithi">Tharaka-Nithi</option>
+                  <option value="Embu">Embu</option>
+                  <option value="Kitui">Kitui</option>
+                  <option value="Machakos">Machakos</option>
+                  <option value="Makueni">Makueni</option>
+                  <option value="Nyandarua">Nyandarua</option>
+                  <option value="Nyeri">Nyeri</option>
+                  <option value="Kirinyaga">Kirinyaga</option>
+                  <option value="Murang'a">Murang'a</option>
+                  <option value="Kiambu">Kiambu</option>
+                  <option value="Turkana">Turkana</option>
+                  <option value="West Pokot">West Pokot</option>
+                  <option value="Samburu">Samburu</option>
+                   <option value="Trans-Nzoia">Trans-Nzoia</option>
+                  <option value="Uasin Gishu">Uasin Gishu</option>
+                  <option value="Elgeyo-Marakwet">Elgeyo-Marakwet</option>
+                   <option value="Nandi">Nandi</option>
+                  <option value="Baringo">Baringo</option>
+                  <option value="Laikipia">Laikipia</option>
+                  <option value="Nakuru">Nakuru</option>
+                  <option value="Narok">Narok</option>
+                  <option value="Kajiado">Kajiado</option>
+                  <option value="Kericho">Kericho</option>
+                  <option value="Bomet">Bomet</option>
+                  <option value="Kakamega">Kakamega</option>
+                   <option value="Vihiga">Vihiga</option>
+                  <option value="Bungoma">Bungoma</option>
+                  <option value="Busia">Busia</option>
+                   <option value="Siaya">Siaya</option>
+                  <option value="Kisumu">Kisumu</option>
+                  <option value="Homa Bay">Homa Bay</option>
+                  <option value="Migori">Migori</option>
+                  <option value="Kisii">Kisii</option>
+                   <option value="Nyamira">Nyamira</option>
+                  <option value="Nairobi">Nairobi</option>
+                  
+                </select>
+                </div>
+      <div class="row">
+        <div class="col-xs-8">
+            <a href="/login" class="text-center">Already a member?</a>
+        </div>
+        
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+
+  
+  </div>
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
+
+<!-- jQuery 3 -->
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="../../plugins/iCheck/icheck.min.js"></script>
+<script>
+ $(document).ready( function () {
+     $('#county').hide();
+     $('#govtauthority').hide();
+     
+    $('#adminrole').click(function(){
+      $('#county').show();
+       $('#govtauthority').hide();
+         $('#selectedauthority').val('');
+    })
+    
+     $('#supervisorrole').click(function(){
+      $('#county').hide();
+       $('#govtauthority').hide();
+       $('#selectedauthority').val('');
+       $('#selectedcounty').val('');
+    })
+    $('#govt').click(function(){
+       $('#govtauthority').show();
+       $('#county').hide();
+       $('#selectedcounty').val('');
+    });
+    var allData = table.columns().data();
+   console.log(allData);
+} );
+</script>
+
+
+</body>
+</html>
+
+ 

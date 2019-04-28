@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <title> Jenga | Dashboard</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">  
+  <!-- Font Awesome Animation-->
+  <link rel="stylesheet" href="bower_components/font-awesome/css/fontawesome-animation.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<style>
+   #map2 {
+        height: 405px;  /* The height is 400 pixels */
+      /width: 100%;  /* The width is the width of the web page */
+       }
+       .dot {
+    height: 15px;
+    width: 15px;
+    border:1px solid black;
+    opacity:0.8;
+    border-radius: 50%;
+    display: inline-block;
+}
+</style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+   
+<div class="wrapper">
+  <header class="main-header">
+   
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b><%=alt%></b></span>
+      <!-- logo for regular state and mobile devices -->
+     
+      <span class="logo-lg"><b> <%=logo%></b></span>
+  
+    </a>
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+
+          <!-- Notifications: style can be found in dropdown.less -->
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning notifNo" ></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header" >You have <span class="notifNo">0</span> notifications</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu" id="last5">
+                 
+                  <!--<li>-->
+                  <!--  <a href="/admins">-->
+                  <!--    <i class="fa fa-users text-red"></i><span id="newAdmin"> 5</span> new admins have registered.-->
+                  <!--  </a>-->
+                  <!--</li>-->
+                  <!--<li>-->
+                  <!--  <a href="/reports">-->
+                  <!--    <i class="fa fa-files-o text-green"></i> <span id="newReport"> 5</span> new reports.-->
+                  <!--  </a>-->
+                  <!--</li>-->
+                 
+                 
+                
+                </ul>
+              </li>
+              <li class="footer"><a href="/notifications">Open Notifications</a></li>
+            </ul>
+          </li>
+        
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="https://ui-avatars.com/api/?name=<%=currentUser.fname%>+<%=currentUser.lname%>&background=0D8ABC&color=ffffff&size=300&uppercase=false" class="user-image" alt="User Image">
+              <span class="hidden-xs"><%=capitalize(currentUser.fname)%> <%=capitalize(currentUser.lname)%></span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="https://ui-avatars.com/api/?name=<%=currentUser.fname%>+<%=currentUser.lname%>&background=0D8ABC&color=ffffff&size=300&uppercase=false" class="img-circle" alt="User Image">
+
+                <p>
+                  <%=capitalize(currentUser.fname)%> <%=capitalize(currentUser.lname)%> - <%=capitalize(currentUser.role)%>
+                 
+                </p>
+              </li>
+              <!-- Menu Body -->
+     
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="/profile" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="https://ui-avatars.com/api/?name=<%=currentUser.fname%>+<%=currentUser.lname%>&background=0D8ABC&color=ffffff&size=300&uppercase=false" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p><%=capitalize(currentUser.fname)%> <%=capitalize(currentUser.lname)%></p>
+          <a href="#"><i class="fa fa-circle  faa-flash animated text-success"></i> Online</a>
+        </div>
+      </div>
+    
+  
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
+        <li class="active ">
+          <a href="/panel">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+          </a>
+        </li>
+       
+        <li class="">
+          <a href="/reports">
+            <i class="fa fa-inbox"></i>
+            <span>View reports</span>
+            <span class="pull-right-container">
+              
+            </span>
+          </a>
+          
+        </li>
+        <% if(currentUser.role=="master-admin"){ %>
+        <li>
+          <a href="/add_admin">
+            <i class="fa fa-plus-square"></i>
+            <span>Add Admin</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+ 
+        <li> 
+          <a href="/admins">
+            <i class=" fa fa-users"></i>
+            <span>Admins</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+        <li> 
+          <a href="/verifications">
+            <i class=" fa fa-user-plus"></i>
+            <span>Activation Requests</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+        <% } %>
+          <% if((currentUser.role==='master-admin')||(currentUser.role==='admin')){%>
+            <li>
+           <a href="/androidusers">
+            <!--<i class=""></i>-->
+            <i class=" ion ion-ios-people-outline"></i>
+            <span>Users</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+          </li>
+       <% }%>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+     <%if(success && success.length > 0){%>
+          
+              <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Alert!</h4>
+                 <%= success %>
+              </div>
+      <% }%> 
+      <%if(error && error.length > 0){%>
+          
+              <div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Alert!</h4>
+                 <%= error %>
+              </div>
+      <% }%>
+    <section class="content-header">
+      <h1>
+        Dashboard
+        <!--<small>Version 2.0</small>-->
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
+        <li class="active">Dashboard</li>
+  
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Info boxes -->
+      <div class="row">
+        
+        <div class="col-md-3 col-sm-6 col-xs-12">
+         <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-files-o"></i></span>
+    
+                <div class="info-box-content">
+                  <span class="info-box-text">Reports</span>
+                  <span class="info-box-number"><%=count%></span>
+                </div>
+                <!-- /.info-box-content -->
+           </div>
+          <!-- /.info-box -->
+        </div>
+        
+        <div class="col-md-<%if(currentUser.role=='admin'){%>5 <% }else{%>3 <% } %> col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-blue"><i class="ion ion-ios-people-outline"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Registered App Users <%if(currentUser.role=='admin'){%> in your county <% }%></span>
+              <span class="info-box-number"><%=appUsers%></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- /.row -->
+
+      <!-- Main row -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Scatter map of reports</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+               
+               <div  class="col-md-10"id="map2"></div>
+               <div class="col-md-2" style="height:405px">
+                    <h4>Key</h4>  
+                <table id="users" class="table table-bordered table-hover">
+                  <thead>
+                <tr>
+                  <th>Marker</th>
+                  <th>Report type</th>
+                  
+                </tr>
+                </thead>
+                <tbody>
+                  <%if(!currentUser.authority){%>
+                  <tr>          
+                    <td><span class="dot" style="background-color:aqua;"></span></td>
+                    <td>Leaking water</td>
+                    
+                  </tr> 
+                  <tr>          
+                    <td><span class="dot" style="background-color: blue;" ></span></td>
+                    <td>Unsafe construction</td>
+                    
+                  </tr> 
+                  <tr>          
+                    <td><span class="dot" style="background-color:yellow ;"></span></td>
+                    <td>Garbage</td>
+                    
+                  </tr> 
+                  <tr>          
+                    <td><span class="dot" style="background-color: red;"></span></td>
+                    <td>Crime</td>
+                    
+                  </tr>
+                  <tr>          
+                    <td><span class="dot" style="background-color:orange ;"></span></td>
+                    <td>Leaking gas</td>
+                    
+                  </tr>
+                  <tr>          
+                    <td><span class="dot" style="background-color: pink;"></span></td>
+                    <td>Leaking sewage</td>
+                    
+                  </tr>
+                  <tr>          
+                    <td><span class="dot" style="background-color: purple;"></span></td>
+                    <td>Riparian building</td>
+                    
+                  </tr>
+                  <tr>          
+                    <td><span class="dot" style="background-color: black;"></span></td>
+                    <td>Potholes</td>
+                    
+                  </tr>
+                  <tr>          
+                    <td><span class="dot" style="background-color: brown;"></span></td>
+                    <td>Any other</td>
+                    
+                  </tr>
+                   
+                  <% }else{ %>
+                  <% var authority=currentUser.authority; 
+                  switch (authority) {
+                      case ('nema'): %>
+                                <tr>          
+                                  <td><span class="dot" style="background-color: pink;"></span></td>
+                                  <td>Leaking sewage</td>
+                                  
+                                </tr>
+                               <tr>          
+                                <td><span class="dot" style="background-color:yellow ;"></span></td>
+                                <td>Garbage</td>
+                                
+                              </tr> 
+                     <%  break;
+                     case ('police'): %>
+                                <tr>          
+                                  <td><span class="dot" style="background-color: red;"></span></td>
+                                  <td>Crime</td>
+                                  
+                                </tr>
+                     <%  break;
+                     case ('pipeline'): %>
+                              <!--html--> 
+                              <tr>          
+                                <td><span class="dot" style="background-color:aqua;"></span></td>
+                                <td>Leaking water</td>
+                                
+                              </tr> 
+                               <tr>          
+                                <td><span class="dot" style="background-color:orange ;"></span></td>
+                                <td>Leaking gas</td>
+                                
+                              </tr>
+                              
+                     <%  break; 
+                     case ('land_commission'): %>
+                              <!--html-->
+                                  <tr>          
+                                    <td><span class="dot" style="background-color: purple;"></span></td>
+                                    <td>Riparian building</td>
+                                    
+                                  </tr>
+                                   <tr>          
+                                    <td><span class="dot" style="background-color: blue;" ></span></td>
+                                    <td>Unsafe construction</td>
+                                    
+                                  </tr> 
+                     <%  break; 
+                     case ('ntsa'): %>
+                              <!--html-->
+                                      <tr>          
+                                        <td><span class="dot" style="background-color: black;"></span></td>
+                                        <td>Potholes</td>
+                                        
+                                      </tr>
+                     <%  break;
+                    
+                     case ('nairobi_water'): %>
+                              <!--html-->
+                     <%  break; 
+                     case (''): %>
+                              <!--html-->
+                     <%  break;
+                    
+  
+                  } %>
+                 <% }%>
+               </tbody>
+              
+             </table>
+               </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>   
+        <div class="col-md-6">
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Top <%if(currentUser.role=='admin'){%>Constituencies<% }else{%>Counties<% }%></h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+               <canvas id="doughnut-chart" width="100%" height="56.5"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+        <!-- right col -->
+        <div class="col-md-6">
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Reports</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+               <canvas id="myChart" width="800" height="450"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+        
+        <!-- /.col -->
+
+        <div class="col-md-6">
+            <!-- TABLE: LATEST ORDERS -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Trending Reports</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                  <tr>
+                    <th>Upvotes</th>
+                    <th>Type</th>
+                    <% if(currentUser.role == 'admin'){%>
+                    <th>Constituency</th>
+                    <% }else{%>
+                    <th>County</th>
+                    <% }%>
+                    <th>Urgent</th>
+                    <th>Status</th>
+                    <th>Comment</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  
+                <%trending.forEach((report,i)=>{%>
+               
+                    <%if(report.isUrgent){var urgent="Yes"}else{var urgent = "No"}%>
+                  <tr>
+                    <td><a href="/reports_s/<%=report.ref_id%>/view"><%=report.upvotes.number%></a></td>
+                    <td><%=capitalize(report.type)%></td>
+              <% if(currentUser.role == 'admin'){%>
+                    <td><%=report.location.constituency%></td>
+                <% }else{%>
+                    <td><%=report.location.county%></td>
+                <% }%>
+                    <td><%=urgent%></td>
+                    <%if(report.status=="solved"){var label="success"}else if(report.status=="escalated"){var label="danger"}else if(report.status=="reported"){var label="info"}%>
+                       <%var date =report.createdAt;
+                             var m = moment(date);  // or whatever start date you have
+                      var today = moment().startOf('day');
+
+                      var days = Math.round(moment.duration(today - m).asDays());var flash =''; if(days>3&&report.status=="reported"){flash='faa-flash animated '; label ="warning"}
+                      %>
+                    <td><span class="label label-<%=label%> <%=flash%>"><%=capitalize(report.status)%></span></td>
+                     <td><%=report.comment.substring(0,50)%></td>
+                     <td><a href="/reports_s/<%=report.ref_id%>/view">View</a></td>
+                  </tr>
+              
+                 <% }) %>
+                  
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+      
+              <a href="/reports" class="btn btn-sm btn-info btn-flat pull-right">View All Reports</a>
+            </div>
+            <!-- /.box-footer -->
+          </div>
+        </div>    
+        <div class="col-md-6">
+            <!-- TABLE: LATEST ORDERS -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Latest Reports</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                  <tr>
+                    <th>Submitted</th>
+                    <th>Type</th>
+                    <% if(currentUser.role == 'admin'){%>
+                    <th>Constituency</th>
+                    <% }else{%>
+                    <th>County</th>
+                    <% }%>
+                    <th>Urgent</th>
+                    <th>Status</th>
+                    <th>Comment</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                <%reports.forEach((report,i)=>{%>
+                    <%if(i<=10){%>
+                    <%if(report.isUrgent){var urgent="Yes"}else{var urgent = "No"}%>
+                  <tr>
+                    <td><%var date =report.createdAt%>
+         <%=moment(date).fromNow()%></td>
+                    <td><%=capitalize(report.type)%></td>
+              <% if(currentUser.role == 'admin'){%>
+                    <td><%=report.location.constituency%></td>
+                <% }else{%>
+                    <td><%=report.location.county%></td>
+                <% }%>
+                    <td><%=urgent%></td>
+                    <%if(report.status=="solved"){var label="success"}else if(report.status=="escalated"){var label="danger"}else if(report.status=="reported"){var label="info"}%>
+                    <% var m = moment(date);  // or whatever start date you have
+                      var today = moment().startOf('day');
+
+                      var days = Math.round(moment.duration(today - m).asDays());var flash =''; if(days>3&&report.status=="reported"){flash='faa-flash animated '; label ="warning"}
+                      %>
+                    <td><span class="label label-<%=label%> <%=flash%> "><%=capitalize(report.status)%></span></td>
+                     <td><%=report.comment.substring(0,50)%></td>
+                      <td><a href="/reports_s/<%=report.ref_id%>/view">View</a></td>
+                  </tr>
+                   <% } %>
+                 <% }) %>
+                  
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+      
+              <a href="/reports" class="btn btn-sm btn-info btn-flat pull-right">View All Reports</a>
+            </div>
+            <!-- /.box-footer -->
+          </div>
+        </div>
+
+
+  
+      
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 2.4.0
+    </div>
+    <strong>Copyright &copy; 2018<a href="https://adminlte.io"> Dev Team Ke</a>.</strong> All rights
+    reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                <p>Will be 23 on April 24th</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-user bg-yellow"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+
+                <p>New phone +1(800)555-1234</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+
+                <p>nora@example.com</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-file-code-o bg-green"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+
+                <p>Execution time 5 seconds</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Custom Template Design
+                <span class="label label-danger pull-right">70%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Update Resume
+                <span class="label label-success pull-right">95%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Laravel Integration
+                <span class="label label-warning pull-right">50%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <h4 class="control-sidebar-subheading">
+                Back End Framework
+                <span class="label label-primary pull-right">68%</span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Allow mail redirect
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Other sets of options are available
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Expose author name in posts
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Allow the user to show his name in blog posts
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Show me as online
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Turn off notifications
+              <input type="checkbox" class="pull-right">
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Delete chat history
+              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+            </label>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- Sparkline -->
+<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<!-- jvectormap  -->
+<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<!-- SlimScroll -->
+<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- ChartJS -->
+<script src="bower_components/chart.js/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!--chart plugin-->
+
+<!--<script src="/scripts/chartjs-labels.js"></script>-->
+<!--Socket io-->
+<script src="/socket.io/socket.io.js"></script>
+<script src="/scripts/socket.js"></script>
+<!--map api-->
+<script>
+  function initMap() {
+  // your code
+}
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-dDXT3_ovgGRfe7Gb3khE1_jv-eWR7k4&callback=initMap">
+</script>
+
+<script>
+
+  
+</script>
+
+<!--initialize chart-->
+
+</body>
+</html>
